@@ -1,0 +1,16 @@
+# Store environment variables / env
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kucli-nest-configmap
+  labels:
+    app: kucli-nest
+data:
+  NODE_ENV: "production"
+  PORT: "3000"
+  HOST: "0.0.0.0"
+  LOG_LEVEL: "debug"
+  # CORS_ORIGIN: "http://localhost:3000"
+  API_PREFIX: "api"
+  API_VERSION: "v1"
+  TEST: "test"

@@ -1,0 +1,17 @@
+# Expose the application to the outside world or inside the cluster 
+apiVersion: v1
+kind: Service
+metadata:
+  name: kucli-nest
+  labels:
+    app: kucli-nest
+spec:
+  # type: ClusterIP | NodePort | LoadBalancer
+  type: ClusterIP
+  selector:
+    app: kucli-nest
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: http

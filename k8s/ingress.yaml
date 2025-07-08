@@ -1,0 +1,40 @@
+# Ingress is used to route traffic to the application with controllers: Nginx, Traefik, etc.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kucli-nest
+  labels:
+    app: kucli-nest
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: 'nginx' # alb : Application Load Balancer
+  rules:
+    - host: api.kucli.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kucli-nest
+                port:
+                  number: 3000
+
+    - host: ticket.kucli.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kucli-nest
+                port:
+                  number: 3000
+
+# api.kucli.local -> kucli-nest -> kucli-nest application
+
+# api.kucli.local/apps/ticket/api/v1/tickets-list -> ticket-kucli-nest -> ticket-service application
+
+# ticket.kucli.local -> ticket-kucli-nest -> ticket-service application
